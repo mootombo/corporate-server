@@ -1,0 +1,2 @@
+755 /etc/update-motd.d/15-mcs-stats
+755 /etc/update-motd.d/16-mcs-help-text
