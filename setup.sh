@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-#    install - copy the file stuff into the system
+#    setup.sh - copy the file stuff into the system
 #    Copyright (C) 2009-2016 devXive - research and development
 #
 #    Authors: Lahmizzar Valeryon
@@ -31,12 +31,8 @@ echo "======================================="
 #is_root && echo "You are logged in as root." || echo "You are not logged in as root."
 check_root_access
 
-# Windows!?)(/§)")/%
-moo_convertff "${SCRIPTDIR}"
-moo_convertff "${SCRIPTDIR}/files/etc/nagios"
-moo_convertff "${SCRIPTDIR}/files/etc/nagios-plugins"
-moo_convertff "${SCRIPTDIR}/etc/update-motd.d"
-moo_convertff "${SCRIPTDIR}/usr/lib/nagios/plugins"
+# Convert library files because of Windows!?)(/§CRAP)")/%. All in /files checked by the propagation script during permission set
+moo_convertff_indir "${SCRIPTDIR}/library"
 
 # Start the install script
 #timer 15
