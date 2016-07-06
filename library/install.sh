@@ -38,6 +38,11 @@ msg_note "" "starting the install script"
 # Install the nagios server for remote monitoring within the UMC
 check_installed nagios-nrpe-server
 
+#######
+# 002 #
+#######
+# Install bc for calculating
+check_installed bc
 
 # Starting the propagation script
 timer 10
