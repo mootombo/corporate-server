@@ -33,7 +33,11 @@ check_root_access
 
 # Windows!?)(/§)")/%
 moo_convertff "${SCRIPTDIR}"
+moo_convertff "${SCRIPTDIR}/files/etc/nagios"
+moo_convertff "${SCRIPTDIR}/files/etc/nagios-plugins"
+moo_convertff "${SCRIPTDIR}/etc/update-motd.d"
+moo_convertff "${SCRIPTDIR}/usr/lib/nagios/plugins"
 
-# Start installer
+# Start the install script
 #timer 15
 bash $SCRIPTDIR/library/install.sh
