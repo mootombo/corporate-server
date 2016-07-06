@@ -18,14 +18,14 @@
 #    You should have received a copy of the GNU General Public License along
 #    with this program; if not, write to the Free Software Foundation, Inc.,
 #    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-
+#
 # Vars
-MCS_UPTIMEP_RAW=$(uptime -p)
-MCS_UPTIMEP=U${MCS_UPTIMEP_RAW:1}
-MCS_UPTIMES=$(uptime -s)
+MCS_UPTIMEP_RAW=`uptime -p`
+MCS_UPTIMEP="${MCS_UPTIMEP_RAW}"
+MCS_UPTIMES=`uptime -s`
 MCS_DISCFREEMB=`stat -f --printf="%a * %s / 1024 / 1000\n" / | bc`
 MCS_DISCFREEGB=`stat -f --printf="%a * %s / 1024 / 1000000\n" / | bc`
-
+#
 # Colors
 BLACK=$(tput setaf 0)
 RED=$(tput setaf 1)
@@ -42,9 +42,9 @@ NORMAL=$(tput sgr0)
 BLINK=$(tput blink)
 REVERSE=$(tput smso)
 UNDERLINE=$(tput smul)
-
+#
 # Stats
-printf "\nMootombo Corporate Server Stats:\n"
-printf "================================\n\n"
+printf "\nServer Stats:\n"
+printf "=============\n\n"
 printf " Uptime:       ${MCS_UPTIMEP} (${YELLOW}${MCS_UPTIMES}${NORMAL})\n"
 printf " Main HDD:     Free space ${GREEN}${MCS_DISCFREEGB}GB${NORMAL} (${MCS_DISCFREEMB}MB)\n"

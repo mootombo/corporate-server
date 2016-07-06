@@ -1,3 +1,4 @@
+755 /etc/update-motd.d/14-mcs-head
 755 /etc/update-motd.d/15-mcs-stats
 755 /etc/update-motd.d/16-mcs-help-text
 644 /etc/nagios/nrpe.cfg
