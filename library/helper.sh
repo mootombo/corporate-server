@@ -178,6 +178,20 @@ function moo_convertff()
 	msg_success "converting files ..." "done!"
 }
 
+#
+#
+#
+#
+# Convert fileformat (dos>unix) for all files only in the given directory
+#
+function moo_convertff_indir()
+{
+	check_installed dos2unix
+	msg_pure "try to convert all files in $1 ..."
+	dos2unix -k $1/*
+	msg_success "converting files ..." "done!"
+}
+
 function moo_clean_this()
 {
 	if [ "$1" != "" ]; then
