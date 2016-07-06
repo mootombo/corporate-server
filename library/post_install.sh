@@ -30,15 +30,11 @@ FILEDIR="${MAINDIR}/files"
 source $LIBDIR/helper.sh
 
 # Script
-msg_note "" "starting the install script"
+msg_note "" "starting the post_install script"
 
 #######
 # 001 #
 #######
-# Install the nagios server for remote monitoring within the UMC
-check_installed nagios-nrpe-server
-
-
-# Starting the propagation script
-timer 10
-bash $LIBDIR/propagation.sh
+# Restart the nagios service
+service nagios-nrpe-server restart
+msg_success "restarting nagios-nrpe-server ... " "done!"

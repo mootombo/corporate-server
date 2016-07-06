@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-#    install - copy the file stuff into the system
+#    copy_files.sh - copy the file stuff into the system
 #    Copyright (C) 2009-2016 devXive - research and development
 #
 #    Authors: Lahmizzar Valeryon
@@ -30,15 +30,26 @@ FILEDIR="${MAINDIR}/files"
 source $LIBDIR/helper.sh
 
 # Script
-msg_note "" "starting the install script"
+msg_note "" "starting the propagation script"
 
-#######
-# 001 #
-#######
-# Install the nagios server for remote monitoring within the UMC
-check_installed nagios-nrpe-server
+# Copy files to
+msg_script "Copy files into the filesystem ..."
+rsync -rv $FILEDIR/* /
 
+msg_script "Set file permissions ..."
+# read file names from library/propagation.txt one by one and copy then into its destination
+# also change the file permissions; (NOTE THAT $file already have a prior slash/)
+while read STRING ; do
+	FILE="${STRING:4}"
+	PERM="${STRING:0:3}"
+	#Use text instead of the -v (verbose option for a cleaner look
+	msg_working "Set file permission for ${FILE} (${PERM}) ... " "done!"
+	#remove cp args due to replacement with rsync
+	#cp -R "${MAINDIR}/files$FILE" "$FILE"
+	chmod -R $STRING
+done < $LIBDIR/propagation.txt
+msg_success "Copy files into the filesystem and set permissions ..." "done!"
 
-# Starting the propagation script
+# Starting the post_install script
 timer 10
-bash $LIBDIR/propagation.sh
+bash $LIBDIR/post_install.sh
