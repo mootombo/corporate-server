@@ -43,19 +43,6 @@ function msg_alert()
 	echo -e "${1}\e[38;5;196m${2}\e[0m${3}"
 }
 
-# Function to echo out a coloured message (Gold)
-# $1	string	coloured text
-function msg_script()
-{
-	if [ "${1}" != "" ]; then
-		echo
-		echo -e "[SCRIPT]: \e[38;5;180m${1}\e[0m"
-	else
-		echo
-		echo -e "[SCRIPT]: \e[38;5;180mMay the Force be with you, my young Padawan!\e[0m"
-	fi
-}
-
 # Function to echo out a coloured message (White)
 # $1	string	coloured text
 function msg_pure()
@@ -84,6 +71,28 @@ function msg_danger()
 	echo -e "${1}\e[38;5;202m${2}\e[0m${3}"
 }
 
+# Function to echo out a coloured message (Yellow)
+# $1	string	pre text
+# $2	string	coloured text
+# $3	string	post text
+function msg_working()
+{
+	echo -e "${1}\e[38;5;226m${2}\e[0m${3}"
+}
+
+# Function to echo out a coloured message (Gold)
+# $1	string	coloured text
+function msg_script()
+{
+	if [ "${1}" != "" ]; then
+		echo
+		echo -e "[SCRIPT]: \e[38;5;180m${1}\e[0m"
+	else
+		echo
+		echo -e "[SCRIPT]: \e[38;5;180mMay the Force be with you, my young Padawan!\e[0m"
+	fi
+}
+
 function check_root_access()
 {
 	msg_user "Currently performing as: " "$USER"
@@ -92,7 +101,7 @@ function check_root_access()
 		msg_success "Root access is: " "GRANTED"
 	else
 		msg_alert "Root access is: " "INVALID"
-		msg_danger "Use " "sudo" "in front of the command to get root access"
+		msg_danger "Use " "sudo" " in front of the command to get root access or log in as root - sudo su"
 		exit 1;
 	fi
 }
@@ -182,5 +191,5 @@ function moo_clean_this()
 
 function killself()
 {
-	rm -R /tmp/wscc-commons*
+	rm -R /tmp/corporate-*
 }
