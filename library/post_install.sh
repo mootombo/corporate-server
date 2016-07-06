@@ -38,3 +38,8 @@ msg_note "" "starting the post_install script"
 # Restart the nagios service
 service nagios-nrpe-server restart
 msg_success "restarting nagios-nrpe-server ... " "done!"
+
+# Script
+apt-get autoremove -y
+msg_note "Remove automatically installed packages that are no longer used ... " "done!"
+
