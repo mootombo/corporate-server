@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-#    copy_files.sh - copy the file stuff into the system
+#    propagation.sh - copy the file stuff into the system
 #    Copyright (C) 2009-2016 devXive - research and development
 #
 #    Authors: Lahmizzar Valeryon
@@ -42,8 +42,12 @@ msg_script "Set file permissions ..."
 while read STRING ; do
 	FILE="${STRING:4}"
 	PERM="${STRING:0:3}"
+
+	# Because Windows
+	dos2unix -q $FILE
+
 	#Use text instead of the -v (verbose option for a cleaner look
-	msg_working "Set file permission for ${FILE} (${PERM}) ... " "done!"
+	msg_working "Try to convert to unix fileformat and set file permission for ${FILE} (${PERM}) ... " "done!"
 	#remove cp args due to replacement with rsync
 	#cp -R "${MAINDIR}/files$FILE" "$FILE"
 	chmod -R $STRING

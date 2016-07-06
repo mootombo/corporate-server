@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-#    install - copy the file stuff into the system
+#    install.sh - check and install apps before propagation files
 #    Copyright (C) 2009-2016 devXive - research and development
 #
 #    Authors: Lahmizzar Valeryon
