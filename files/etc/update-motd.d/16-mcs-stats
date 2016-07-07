@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-#    14-mcs-head - print head informations
+#    15-mcs-stats - print informations about disc space and uptime
 #    Copyright (C) 2009-2016 devXive - research and development
 #
 #    Authors: Lahmizzar Valeryon
@@ -19,9 +19,9 @@
 #    with this program; if not, write to the Free Software Foundation, Inc.,
 #    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
-printf "\nMOOTOMBO Corporate Server 3.0:\n"
-printf "================================\n\n"
-printf "The MCS is prepaired for monitoring with Nagios through the UCS Master.\n\n"
-printf "You can log into the Univention Management Console - the principal tool to\n"
-printf "manage users, groups, etc. - using the "Administrator" account and the password\n"
-printf "selected for the root user on the master domain controller.\n"
+# Stats
+if [ -f /dev/sdb ]; then
+	MCS_DISCFREEMBB=`stat -f --printf="%a * %s / 1024 / 1000\n" /media/ocdrive | bc`
+	MCS_DISCFREEGBB=`stat -f --printf="%a * %s / 1024 / 1000000\n" /media/ocdrive | bc`
+	printf " Second HDD:   Free space ${GREEN}${MCS_DISCFREEGBB}GB${NORMAL} (${MCS_DISCFREEMBB}MB)\n"
+fi

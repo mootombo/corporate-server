@@ -1,6 +1,7 @@
 755 /etc/update-motd.d/14-mcs-head
 755 /etc/update-motd.d/15-mcs-stats
-755 /etc/update-motd.d/16-mcs-help-text
+755 /etc/update-motd.d/16-mcs-stats
+755 /etc/update-motd.d/20-mcs-help-text
 644 /etc/nagios/nrpe.cfg
 644 /etc/nagios/nrpe_local.cfg
 644 /etc/nagios/nrpe.mootombo.d/MOOTOMBO_APT.cfg
