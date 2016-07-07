@@ -44,6 +44,15 @@ check_installed nagios-nrpe-server
 # Install bc for calculating
 check_installed bc
 
+#######
+# 003 #
+#######
+# Install smartmontools on physical systems
+IS_PHYSICAL=`dmesg |grep -i hypervisor`
+if [ ! "$IS_PHYSICAL" ]; then
+	check_installed smartmontools
+fi
+
 # Starting the propagation script
 timer 5
 bash $LIBDIR/propagation.sh

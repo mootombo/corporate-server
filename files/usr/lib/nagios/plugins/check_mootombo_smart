@@ -1,0 +1,79 @@
+#!/bin/sh
+#
+#
+# MOOTOMBO Nagios Plugin - check_mootombo_smart
+#
+# Copyright 1997-2016 devXive - research and development. All rights reserved.
+#
+# http://www.devxive.com
+#
+# The source code of this program is made available
+# under the terms of the GNU Affero General Public License version 3
+# (GNU AGPL V3) as published by the Free Software Foundation.
+#
+# Binary versions of this program provided by devXive to you as
+# well as other copyrighted, protected or trademarked materials like
+# Logos, graphics, fonts, specific documentations and configurations,
+# cryptographic keys etc. are subject to a license agreement between
+# you and devXive and not subject to the GNU AGPL V3.
+#
+# In the case you use this program under the terms of the GNU AGPL V3,
+# the program is provided in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public
+# License with the Debian GNU/Linux or devXive distribution in file
+# /usr/share/common-licenses/AGPL-3; if not, see
+# <http://www.gnu.org/licenses/>.
+#
+#
+# Standard Nagios plugin return codes.
+STATUS_OK=0
+STATUS_WARNING=1
+STATUS_CRITICAL=2
+STATUS_UNKNOWN=3
+
+# Vars
+FIRST_HDD=`df -h | grep sda`
+SECOND_HDD=`df -h | grep sdb`
+PREFIX="SMART overall-health self-assessment test result: "
+SUFFIX=""
+
+# Check health status for first and if exist for second hdd on physical disks
+IS_PHYSICAL=`dmesg |grep -i hypervisor`
+if [ ! "$IS_PHYSICAL" ]; then
+	if [ "$FIRST_HDD" ]; then
+		SMART_HDD1=`/usr/bin/sudo /usr/sbin/smartctl -H /dev/sda | grep -e ^SMART`
+		MSG1=${SMART_HDD1#$PREFIX}
+		EXIT_MSG1="First HDD health status (sda)  - $MSG1"
+		# echo "$EXIT_MSG1"
+	else
+		EXIT_MSG1=""
+	fi
+
+	if [ "$SECOND_HDD" ]; then
+		SMART_HDD2=`/usr/bin/sudo /usr/sbin/smartctl -H /dev/sda | grep -e ^SMART`
+		MSG2=${SMART_HDD2#$PREFIX}
+		EXIT_MSG2="Second HDD health status (sdb) - $MSG2"
+		# echo "$EXIT_MSG2"
+	else
+		EXIT_MSG2=""
+	fi
+fi
+
+if [ "$MSG1" = "" ] || [ "$MSG2" = "" ]; then
+	EXIT_MSG="$EXIT_MSG1 $EXIT_MSG2"
+else
+	EXIT_MSG="$EXIT_MSG1 --- $EXIT_MSG2"
+fi
+	
+if [ "$MSG1" = "PASSED" ] && [ "$MSG2" = "PASSED" ]
+	then
+		echo $EXIT_MSG
+		exit $STATUS_OK
+	else
+		echo $EXIT_MSG
+		exit $STATUS_WARNING
+fi

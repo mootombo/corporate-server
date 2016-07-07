@@ -39,6 +39,23 @@ msg_note "" "starting the post_install script"
 service nagios-nrpe-server restart
 msg_success "restarting nagios-nrpe-server ... " "done!"
 
+#######
+# 003 #
+#######
+# Add smartctl to the sudoers list for nagios
+IS_PHYSICAL=`dmesg |grep -i hypervisor`
+if [ ! "$IS_PHYSICAL" ]; then
+	if [ ! -f /usr/lib/mootombo-install/nagios-smartctl-sudoers ]; then
+		msg_note "Adding smartctl to the list of sudoers ..." "done!"
+		echo "" >> /etc/sudoers
+		echo "# Nagios" >> /etc/sudoers
+		echo "nagios	ALL=(root) NOPASSWD: /usr/sbin/smartctl" >> /etc/sudoers
+		touch /usr/lib/mootombo-install/nagios-smartctl-sudoers
+	else
+		msg_success "smartctl already exist in the list of sudoers ..." "skip!"
+	fi
+fi
+
 # Script
 apt-get autoremove -y
 msg_note "Remove automatically installed packages that are no longer used ... " "done!"

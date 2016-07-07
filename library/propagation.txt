@@ -12,6 +12,7 @@
 644 /etc/nagios/nrpe.mootombo.d/MOOTOMBO_LOAD.cfg
 644 /etc/nagios/nrpe.mootombo.d/MOOTOMBO_NSCD.cfg
 644 /etc/nagios/nrpe.mootombo.d/MOOTOMBO_REPLICATION.cfg
+644 /etc/nagios/nrpe.mootombo.d/MOOTOMBO_SMART.cfg
 644 /etc/nagios/nrpe.mootombo.d/MOOTOMBO_SMTP2.cfg
 644 /etc/nagios/nrpe.mootombo.d/MOOTOMBO_SWAP.cfg
 644 /etc/nagios-plugins/check_rbl.ini
@@ -92,6 +93,7 @@
 755 /usr/lib/nagios/plugins/check_mootombo_nfsstatus
 755 /usr/lib/nagios/plugins/check_mootombo_nmbd
 755 /usr/lib/nagios/plugins/check_mootombo_replication
+755 /usr/lib/nagios/plugins/check_mootombo_smart
 755 /usr/lib/nagios/plugins/check_mootombo_smbd
 755 /usr/lib/nagios/plugins/check_mootombo_smtp
 755 /usr/lib/nagios/plugins/check_mootombo_ssl_certificate

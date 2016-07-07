@@ -35,9 +35,20 @@ STATUS_WARNING=1
 STATUS_CRITICAL=2
 STATUS_UNKNOWN=3
 
+# Vars
+STATE=$1
+if [ "$STATE" = "test" ]; then
+	echo "*** TEST STATE ***"
+	exit $STATUS_CRITICAL
+fi
+
 #
 # Query pending updates.
 updates=$(/usr/lib/update-notifier/apt-check 2>&1)
+#updates_1=$(apt-get -s upgrade | grep "^Inst" | wc -l)
+updates_2=$(apt-get -s dist-upgrade | grep "^Inst" | wc -l)
+#updates_3=$(apt-get -s dist-upgrade | grep "^Inst" | grep -i security | wc -l)
+#
 if [ $? -ne 0 ]; then
     echo "*** Querying pending updates failed ***"
     exit $STATUS_UNKNOWN
@@ -50,6 +61,13 @@ if [ "$updates" = "0;0" ]; then
         echo "*** System restart required ***"
         exit $STATUS_WARNING
     fi
+
+    # Second check
+    if [ "$updates_2" > 0 ]; then
+        echo "*** $updates_2 unknown update(s) pending ***"
+        exit $STATUS_WARNING
+    fi
+
     echo "All packages are up-to-date!"
     exit $STATUS_OK
 fi;
