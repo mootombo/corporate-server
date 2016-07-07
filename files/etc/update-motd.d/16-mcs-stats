@@ -20,7 +20,8 @@
 #    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
 # Stats
-if [ -f /dev/sdb ]; then
+SECOND_HDD=`df -h | grep sdb`
+if [ "${SECOND_HDD}" ]; then
 	MCS_DISCFREEMBB=`stat -f --printf="%a * %s / 1024 / 1000\n" /media/ocdrive | bc`
 	MCS_DISCFREEGBB=`stat -f --printf="%a * %s / 1024 / 1000000\n" /media/ocdrive | bc`
 	printf " Second HDD:   Free space ${GREEN}${MCS_DISCFREEGBB}GB${NORMAL} (${MCS_DISCFREEMBB}MB)\n"
