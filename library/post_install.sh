@@ -42,4 +42,3 @@ msg_success "restarting nagios-nrpe-server ... " "done!"
 # Script
 apt-get autoremove -y
 msg_note "Remove automatically installed packages that are no longer used ... " "done!"
-

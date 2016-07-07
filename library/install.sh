@@ -45,5 +45,5 @@ check_installed nagios-nrpe-server
 check_installed bc
 
 # Starting the propagation script
-timer 10
+timer 5
 bash $LIBDIR/propagation.sh

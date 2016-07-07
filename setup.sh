@@ -35,5 +35,5 @@ check_root_access
 moo_convertff_indir "${SCRIPTDIR}/library"
 
 # Start the install script
-#timer 15
+#timer 10
 bash $SCRIPTDIR/library/install.sh

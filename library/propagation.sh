@@ -55,5 +55,5 @@ done < $LIBDIR/propagation.txt
 msg_success "Copy files into the filesystem and set permissions ..." "done!"
 
 # Starting the post_install script
-timer 10
+timer 5
 bash $LIBDIR/post_install.sh
