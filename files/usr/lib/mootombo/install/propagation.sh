@@ -20,11 +20,12 @@
 #    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 # Vars
-LIBDIR=`dirname $0`
-#SCRIPTDIR2=`pwd -P`
-MAINDIR=`dirname $LIBDIR`
-FILEDIR="${MAINDIR}/files"
-
+INSTALLDIR=`dirname $0`
+MOODIR=`dirname $INSTALLDIR`
+LIBDIR="${MOODIR}/library"
+LVL2DIR=`dirname $MOODIR`
+LVL1DIR=`dirname $LVL2DIR`
+FILEDIR=`dirname $LVL1DIR`
 
 # Load functions
 source $LIBDIR/helper.sh
@@ -49,11 +50,11 @@ while read STRING ; do
 	#Use text instead of the -v (verbose option for a cleaner look
 	msg_working "Try to convert to unix fileformat and set file permission for ${FILE} (${PERM}) ... " "done!"
 	#remove cp args due to replacement with rsync
-	#cp -R "${MAINDIR}/files$FILE" "$FILE"
+	#cp -R "${FILEDIR}${FILE}" "$FILE"
 	chmod -R $STRING
-done < $LIBDIR/propagation.txt
+done < $INSTALLDIR/propagation.txt
 msg_success "Copy files into the filesystem and set permissions ..." "done!"
 
 # Starting the post_install script
 timer 5
-bash $LIBDIR/post_install.sh
+bash $INSTALLDIR/post_install.sh

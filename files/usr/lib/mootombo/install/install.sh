@@ -20,17 +20,24 @@
 #    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 # Vars
-LIBDIR=`dirname $0`
-#SCRIPTDIR2=`pwd -P`
-MAINDIR=`dirname $LIBDIR`
-FILEDIR="${MAINDIR}/files"
-
+INSTALLDIR=`dirname $0`
+MOODIR=`dirname $INSTALLDIR`
+LIBDIR="${MOODIR}/library"
 
 # Load functions
 source $LIBDIR/helper.sh
 
 # Script
 msg_note "" "starting the install script"
+
+#######
+# 000 #
+#######
+# Install dependencies and other tools that not have to be configured
+check_installed zip		# Install zip
+check_installed htop		# Install htop to check performance in addition for diagnostics
+check_installed bc		# Install bc for calculating
+check_installed nfs-common	# Install nfs-common to mount remote dirs managed by univention
 
 #######
 # 001 #
@@ -41,12 +48,6 @@ check_installed nagios-nrpe-server
 #######
 # 002 #
 #######
-# Install bc for calculating
-check_installed bc
-
-#######
-# 003 #
-#######
 # Install smartmontools on physical systems
 IS_PHYSICAL=`dmesg |grep -i hypervisor`
 if [ ! "$IS_PHYSICAL" ]; then
@@ -55,4 +56,4 @@ fi
 
 # Starting the propagation script
 timer 5
-bash $LIBDIR/propagation.sh
+bash $INSTALLDIR/propagation.sh

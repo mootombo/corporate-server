@@ -20,11 +20,12 @@
 #    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 # Vars
-LIBDIR=`dirname $0`
-#SCRIPTDIR2=`pwd -P`
-MAINDIR=`dirname $LIBDIR`
-FILEDIR="${MAINDIR}/files"
-
+INSTALLDIR=`dirname $0`
+MOODIR=`dirname $INSTALLDIR`
+LIBDIR="${MOODIR}/library"
+LVL2DIR=`dirname $MOODIR`
+LVL1DIR=`dirname $LVL2DIR`
+FILEDIR=`dirname $LVL1DIR`
 
 # Load functions
 source $LIBDIR/helper.sh
@@ -40,7 +41,7 @@ service nagios-nrpe-server restart
 msg_success "restarting nagios-nrpe-server ... " "done!"
 
 #######
-# 003 #
+# 002 #
 #######
 # Add smartctl to the sudoers list for nagios
 IS_PHYSICAL=`dmesg |grep -i hypervisor`
