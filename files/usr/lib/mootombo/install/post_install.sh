@@ -57,6 +57,13 @@ if [ ! "$IS_PHYSICAL" ]; then
 	fi
 fi
 
+#######
+# A01 #
+#######
+# Update the ca-certificates
+#dpkg-reconfigure ca-certificates --unseen-only
+update-ca-certificates
+
 # Script
 apt-get autoremove -y
 msg_note "Remove automatically installed packages that are no longer used ... " "done!"

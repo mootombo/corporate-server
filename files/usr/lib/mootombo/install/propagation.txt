@@ -53,6 +53,7 @@
 644 /etc/nagios-plugins/config/whois.cfg
 644 /etc/nagios-plugins/config/zone_auth.cfg
 644 /etc/nagios-plugins/config/zone-rrsig.cfg
+644 /etc/ca-certificates.conf
 755 /usr/lib/nagios/plugins/check_backuppc
 755 /usr/lib/nagios/plugins/check_breeze
 755 /usr/lib/nagios/plugins/check_cert_expire
