@@ -20,10 +20,11 @@
 #    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 # Vars
-SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+#CURRENTDIRFROMWHEREYOUSTART=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+SCRIPTDIR="$(dirname $0)"
 
 # Load functions
-source $SCRIPTDIR/library/helper.sh
+source $SCRIPTDIR/files/usr/lib/mootombo/library/helper.sh
 
 # Script
 echo "Mootombo Corporate Server Installation:"
@@ -32,8 +33,9 @@ echo "======================================="
 check_root_access
 
 # Convert library files because of Windows!?)(/§CRAP)")/%. All in /files checked by the propagation script during permission set
-moo_convertff_indir "${SCRIPTDIR}/library"
+moo_convertff_indir "${SCRIPTDIR}/files/usr/lib/mootombo/library"
+moo_convertff_indir "${SCRIPTDIR}/files/usr/lib/mootombo/install"
 
 # Start the install script
-#timer 10
-bash $SCRIPTDIR/library/install.sh
+timer 5
+bash $SCRIPTDIR/files/usr/lib/mootombo/install/install.sh
