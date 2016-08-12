@@ -32,11 +32,6 @@ source $INSTALLDIR/config.sh
 # Script
 msg_note "" "starting the install script"
 
-#############################
-# Install available updates #
-#############################
-#apt-get update && apt-get upgrade && apt-get dist-upgrade && apt-get autoremove
-
 ########################
 # Install dependencies #
 ########################
