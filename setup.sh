@@ -36,6 +36,12 @@ check_root_access
 moo_convertff_indir "${SCRIPTDIR}/files/usr/lib/mootombo/library"
 moo_convertff_indir "${SCRIPTDIR}/files/usr/lib/mootombo/install"
 
+#############################
+# Install available updates #
+#############################
+msg_note "" "Check for and install updates and upgrades"
+apt-get update && apt-get upgrade && apt-get dist-upgrade && apt-get autoremove
+
 # Start the install script
 timer 5
 bash $SCRIPTDIR/files/usr/lib/mootombo/install/install.sh
